@@ -22,7 +22,6 @@ export default class TransformableImage extends Component {
     enableTransform: PropTypes.bool,
     enableScale: PropTypes.bool,
     enableTranslate: PropTypes.bool,
-    onSingleTapConfirmed: PropTypes.func,
     onTransformGestureReleased: PropTypes.func,
     onViewTransformed: PropTypes.func
   };
@@ -91,17 +90,20 @@ export default class TransformableImage extends Component {
         enableTransform={this.props.enableTransform && this.state.imageLoaded} //disable transform until image is loaded
         enableScale={this.props.enableScale}
         enableTranslate={this.props.enableTranslate}
-        enableResistance={true}
+        enableResistance={false}
         onTransformGestureReleased={this.props.onTransformGestureReleased}
+        onTransformStart={this.props.onTransformStart}
         onViewTransformed={this.props.onViewTransformed}
-        onSingleTapConfirmed={this.props.onSingleTapConfirmed}
         maxScale={maxScale}
         contentAspectRatio={contentAspectRatio}
         onLayout={this.onLayout.bind(this)}
-        style={this.props.style}>
+        style={this.props.style}
+        viewportWidth={this.props.viewportWidth}
+        viewportHeight={this.props.viewportHeight}
+        preScale={this.props.preScale}>
         <Image
           {...this.props}
-          style={[this.props.style, {backgroundColor: 'transparent'}]}
+          style={[this.props.imageStyle, {backgroundColor: 'transparent'}]}
           resizeMode={'contain'}
           onLoadStart={this.onLoadStart.bind(this)}
           onLoad={this.onLoad.bind(this)}
